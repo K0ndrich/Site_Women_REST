@@ -16,6 +16,7 @@ class WomenAPIView(APIView):
         return Response({"title": "my_value"})
 
 
+# ListAPIView отображает указаные записи из нашей модели, которую связали в serializers.py
 # class WomenAPIView(generics.ListAPIView):
 #     # queryset тоже самое что и get_query_set в простом django
 #     queryset = Women.objects.filter(is_published=True)
