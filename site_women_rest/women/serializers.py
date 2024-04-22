@@ -40,9 +40,6 @@ class WomenSerializer(serializers.ModelSerializer):
 #         instance.cat_id = validate_data.get("cat_id", instance.cat_id)
 #         instance.save()
 #         return instance
-
-#     def delete(self, instance, validate_data):
-#         instance.delete()
 #
 #
 #

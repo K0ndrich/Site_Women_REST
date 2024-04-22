@@ -48,20 +48,6 @@ class WomenAPIView(APIView):
         serializer.save()
         return Response({"post": serializer.data})
 
-    def delete(self, request, *args, **kwargs):
-        pk = kwargs.get("pk", None)
-        if not pk:
-            return Response({"Error": "Method DELETE is not defined"})
-        try:
-            instance = Women.objects.get(pk=pk)
-        except:
-            return Response({"Error": "Object is not exist"})
-
-        serializer = WomenSerializer(data=request.data, instance=instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({"Delete Object -> ": str(pk)})
-
 
 # ListAPIView отображает указаные записи из нашей модели, которую связали в serializers.py
 # class WomenAPIView(generics.ListAPIView):
