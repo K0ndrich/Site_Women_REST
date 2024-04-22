@@ -1,25 +1,32 @@
 from django.shortcuts import render
 from django.forms import model_to_dict
+
 from .models import Women, Category
 from .serializers import WomenSerializer
 
-# берем базовые представления из Djago REST
 from rest_framework import generics
 from rest_framework.views import APIView
-
 from rest_framework.response import Response
 
 
 class WomenAPIView(APIView):
     # для обработки GET запросов
     def get(self, request):
-        # .values() позволяет брать значения, а не queryset
-        lst = Women.objects.all().values()
+
+        w = Women.objects.all()
         # Response просто возвращает фиксированую указаную .json строку
-        return Response({"post": list(lst)})
+        # many=True указывает серилизиатору обрабатывать не одну запись  , а queryset записей нашей модели
+        # data возвращает саму строку json
+        return Response({"posts": WomenSerializer(w, many=True).data})
 
     # для обработки POST запросов
     def post(self, request):
+
+        # проверку значений которые передаеть пользователь с указаными сериализаторе WomenSerializer
+        # не бут отображаться странице Error , а json строке с неарпавильно указынми полями
+        serializer = WomenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
         # создание новой записи в модели клиентов через POST запрос
         post_new = Women.objects.create(
             # requet.data["title"] - ето значения в URL адресе
@@ -27,8 +34,9 @@ class WomenAPIView(APIView):
             content=request.data["content"],
             cat_id=request.data["cat_id"],
         )
+
         # model_to_dict преобразовует запись или записи модели в тип словаря
-        return Response({"title": model_to_dict(post_new)})
+        return Response({"post": WomenSerializer(post_new).data})
 
 
 # ListAPIView отображает указаные записи из нашей модели, которую связали в serializers.py
