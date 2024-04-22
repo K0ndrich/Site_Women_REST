@@ -23,7 +23,7 @@ class WomenAPIView(APIView):
     def post(self, request):
 
         # проверку значений которые передаеть пользователь с указаными сериализаторе WomenSerializer
-        # не бут отображаться странице Error , а json строке с неарпавильно указынми полями
+        # не бут отображаться странице Error , а json строке с неправильно указаными полями
         serializer = WomenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
