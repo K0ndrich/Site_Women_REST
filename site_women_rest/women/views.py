@@ -21,10 +21,33 @@ from rest_framework.generics import (
 from rest_framework import viewsets
 
 
+# ViewSet -> APIView
 class WomenViewSet(viewsets.ModelViewSet):
     queryset = Women.objects.all()
     serializer_class = WomenSerializer
-    
+
+    # возвращает набор записей
+    def list(self, request):
+        pass
+
+    # создает одну новую запись
+    def create(self, request):
+        pass
+
+    # возвращает одну запись
+    def retrieve(self, request, pk=None):
+        pass
+
+    # изменяет одну запись
+    def update(self, request, pk=None):
+        pass
+
+    def partial_update(self, request, pk=None):
+        pass
+
+    # удаляет одну запись
+    def destroy(self, request, pk=None):
+        pass
 
 
 # -----   НЕ ИСПОЛЬЗУЕМ   -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

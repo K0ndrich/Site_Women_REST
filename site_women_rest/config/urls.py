@@ -16,14 +16,24 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from women.views import *
+from rest_framework import routers
 
+# создание роутера
+router = routers.SimpleRouter()
+# регистрация нашего ViewSet в роутере
+# women подсталяеться в конец нашего пути
+router.register(r"women", WomenViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    #
     # заходим в сам API нашего сайта
-    path("api/v1/womenlist/", WomenAPIList.as_view()),
-    path("api/v1/womenlist/<int:pk>/", WomenAPIUpdate.as_view()),
-    path("api/v1/womendetail/<int:pk>/", WomenAPIDetailView.as_view()),
+    # обрабатывает все типы запросов
+    path("api/v1/", include(router.urls)),  # 127.0.0.1:8000/api/v1/women
+    # для ViewSet нужно указывать какие методы будут вызывать для каждого типа запроса от клиента
+    # get (тип запроса) : list (какой метод будет обрабатывать)
+    # path("api/v1/womenlist/", WomenViewSet.as_view({"get": "list"})),
+    # path("api/v1/womenlist/<int:pk>/", WomenViewSet.as_view({"put": "update"})),
 ]
