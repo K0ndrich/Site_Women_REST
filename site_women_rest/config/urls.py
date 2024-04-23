@@ -20,7 +20,7 @@ from django.urls import path, include
 from women.views import *
 from rest_framework import routers
 
-# создание роутера
+# создание своего роутера
 router = routers.SimpleRouter()
 # регистрация нашего ViewSet в роутере
 # women подсталяеться в конец нашего пути
