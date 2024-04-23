@@ -124,3 +124,14 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# можна указывать все настройки REST части нашего сайта
+REST_FRAMEWORK = {
+    # указывает какие классы могут обрабатывать запросы к сайту
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        # отключаем возможность захождения клиента в API сайта через URL адресс
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ]
+}

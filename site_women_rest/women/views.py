@@ -18,18 +18,32 @@ from rest_framework.generics import (
     RetrieveDestroyAPIView,
     RetrieveUpdateDestroyAPIView,
 )
+from rest_framework import viewsets
 
 
-class WomenAPIList(ListCreateAPIView):
-    # queryset список записей, которые будут возвращаться клиенту
+class WomenViewSet(viewsets.ModelViewSet):
     queryset = Women.objects.all()
     serializer_class = WomenSerializer
+    
 
 
-class WomenAPIUpdate(UpdateAPIView):
-    # но клиенту будет возвращаться одно измененая запись
-    queryset = Women.objects.all()
-    serializer_class = WomenSerializer
+# -----   НЕ ИСПОЛЬЗУЕМ   -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# class WomenAPIList(ListCreateAPIView):
+#     # queryset список записей, которые будут возвращаться клиенту
+#     queryset = Women.objects.all()
+#     serializer_class = WomenSerializer
+
+
+# class WomenAPIUpdate(UpdateAPIView):
+#     # но клиенту будет возвращаться одна текузая измененая запись
+#     queryset = Women.objects.all()
+#     serializer_class = WomenSerializer
+
+
+# class WomenAPIDetailView(RetrieveUpdateDestroyAPIView):
+#     queryset = Women.objects.all()
+#     serializer_class = WomenSerializer
 
 
 # -----   НЕ ИСПОЛЬЗУЕМ   --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
