@@ -24,5 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # заходим в сам API нашего сайта
     path("api/v1/womenlist/", WomenAPIList.as_view()),
-    path("api/v1/womenlist/<int:pk>/", WomenAPIList.as_view()),
+    path("api/v1/womenlist/<int:pk>/", WomenAPIUpdate.as_view()),
 ]
