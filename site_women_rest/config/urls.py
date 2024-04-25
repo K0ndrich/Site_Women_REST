@@ -32,6 +32,7 @@ urlpatterns = [
     # заходим в сам API нашего сайта
     # обрабатывает все типы запросов
     path("api/v1/", include(router.urls)),  # 127.0.0.1:8000/api/v1/women
+    #
     # для ViewSet нужно указывать какие методы будут вызывать для каждого типа запроса от клиента
     # get (тип запроса) : list (какой метод будет обрабатывать)
     # path("api/v1/womenlist/", WomenViewSet.as_view({"get": "list"})),
