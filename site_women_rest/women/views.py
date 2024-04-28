@@ -20,34 +20,28 @@ from rest_framework.generics import (
 )
 from rest_framework import viewsets
 
+from rest_framework.decorators import action
+
 
 # ViewSet -> APIView
 class WomenViewSet(viewsets.ModelViewSet):
-    queryset = Women.objects.all()
+    # queryset = Women.objects.all()
     serializer_class = WomenSerializer
 
-    # возвращает набор записей
-    def list(self, request):
-        pass
+    # переопредиляем queryset , который был выше
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        if not pk:
+            return Women.objects.all()[:3]
 
-    # создает одну новую запись
-    def create(self, request):
-        pass
+        return Women.objects.filter(pk=pk)
 
-    # возвращает одну запись
-    def retrieve(self, request, pk=None):
-        pass
-
-    # изменяет одну запись
-    def update(self, request, pk=None):
-        pass
-
-    def partial_update(self, request, pk=None):
-        pass
-
-    # удаляет одну запись
-    def destroy(self, request, pk=None):
-        pass
+    # @action позволяет добалвялть новые методы для маршрутизации
+    # detail=True будет возвращаться одну запись в таблице Category
+    @action(methods=["GET"], detail=True)
+    def category(self, request, pk=None):
+        cats = Category.objects.filter(pk=pk)
+        return Response({"cats": [c.name for c in cats]})
 
 
 # -----   НЕ ИСПОЛЬЗУЕМ   -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
